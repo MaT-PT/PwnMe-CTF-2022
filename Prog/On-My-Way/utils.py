@@ -1,6 +1,6 @@
 from typing import Callable, Literal
 
-import pwn
+import pwn  # type: ignore
 
 ENTREE = ord("E")
 SORTIE = ord("S")
@@ -44,7 +44,7 @@ def get_e_s_coords(layers: list[list[bytes]]) -> tuple[tuple[int, int, int] | No
                     return pos_e, pos_s
     return pos_e, pos_s
 
-def on_my_way(host: str, port: int, solver: Callable[[list[list[bytes]]], int | str]) -> None:
+def on_my_way(host: str, port: int, solver: Callable[[list[list[bytes]]], int | str | None]) -> None:
     """
     Connect to the server and solve the maze using the given solving function
     """
