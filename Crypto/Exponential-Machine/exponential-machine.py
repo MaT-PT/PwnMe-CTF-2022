@@ -37,12 +37,14 @@ This code file has two implementations of this algorithm:
 The first one is a naive approach that sends 10**c for increasing values of c
 until it hits 1 as a result. We then know that 10**(c-1) ≤ x < 10**c, so
 len(x) == c (because len(10**c) == c+1).
+Complexity: len(x) + 1
 
 - find_size_dicho():
 The second implementation uses dichotomy by finding between which powers of 2
 x lies, and then seeing if it is greater or lower than the middle point.
 We repeat that until the interval size is 1. This allows us to close in on x
 much faster than with the naive approach.
+Complexity: 2 * (1 + int(log₂(len(x)))
 
 Now that we know the size of x, we can start finding its digits.
 As before, there are two possible algorithms in this file:
@@ -54,6 +56,7 @@ When this happens, we go on to the second digit, and keep this up until we
 reach the end.
 There is a special case when d == 9 and N ≤ x, 9 is the right digit and we can
 go to the next position.
+Complexity: O(len(x)), best case 1 + len(x) (100…), worst case 9 * len(x) (999…)
 
 Examples:
 * x = 42:
@@ -69,6 +72,9 @@ This time though, we use a slightly more optimized way to close in on
 the right digit.
 We start with d = 5, and depending on whether N is greater or lower than x,
 we try another digit that is close to the middle of the remaining interval.
+Complexity: I didn’t test it thoroughly, but it should be better on average.
+It can still be worse than the previous one, eg. with 100…, this version has to
+try 4 values of a digit if it is a 0, compared to 2 tries with the other one.
 
 Here is the table used in this implementation:
 
